@@ -1,168 +1,71 @@
-//1
-// import React, {useState} from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
+import React, { useState, useEffect } from "react";
 
-// function UsersList() {
-//     const results = useState<void>(["Bob", "Alex", "Ann"])
-//     const users = results[0]
-//     const setUsers = results[1]
+type FilterType = "all" | "Dollars" | "RUBLS";
 
-//     return (
-//        <p>Тут будет список пользователей</p>
-//     )
-// }
+export const App = () => {
+  const [money, setMoney] = useState([
+    { banknots: "Dollars", value: 100, number: " a1234567890" },
+    { banknots: "Dollars", value: 50, number: " z1234567890" },
+    { banknots: "RUBLS", value: 100, number: " w1234567890" },
+    { banknots: "Dollars", value: 100, number: " e1234567890" },
+    { banknots: "Dollars", value: 50, number: " c1234567890" },
+    { banknots: "RUBLS", value: 100, number: " r1234567890" },
+    { banknots: "Dollars", value: 50, number: " x1234567890" },
+    { banknots: "RUBLS", value: 50, number: " v1234567890" },
+  ]);
 
-// ReactDOM.render(
-//     <UsersList/>, document.getElementById('root')
-// );
+  const [filter, setFilter] = useState<FilterType>("all");
+  const [filterMoney, setFilterMoney] = useState(money);
 
-//2
+  // const onClickFilterHandler = (currentValute: string) => {
+  //   switch (currentValute) {
+  //     case "all":
+  //       return money;
+  //       break;
+  //     case "Dollar":
+  //       filterMoney = money.filter((money) => money.banknots === "Dollars");
+  //       setMoney(filterMoney);
+  //       break;
+  //     case "Ruble":
+  //       filterMoney = money.filter((money) => money.banknots === "RUBLS");
+  //       setMoney(filterMoney);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+  useEffect(() => {
+    let filterMoney = money;
+    filterMoney = money.filter((item) => {
+      if (filter === "all") {
+        return item;
+      } else {
+        return item.banknots === filter;
+      }
+    });
+    setFilterMoney(filterMoney);
+  }, [filter]);
 
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
+  const onClickFilterHandler = (nameButton: FilterType) => {
+    setFilter(nameButton);
+  };
 
-//   return <p>Тут будет список пользователей!</p>;
-// };
-
-//3
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// export const UsersList = () => {
-//   const results = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-
-//   const users = results[0];
-//   const setUsers = results[1];
-//   console.log(results.length)
-
-//   return <p>Тут будет список пользователей</p>;
-// }
-
-//4
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   console.log(Array.isArray(users));
-//   return <p>Тут будет список пользователей</p>;
-// };
-
-//5
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   console.log(typeof setUsers);
-//   return <p>Тут будет список пользователей</p>;
-// };
-
-//7
-// import React, {useState} from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-
-// export const UsersList = () => {
-//     const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"])
-//     const getUser = (user: string) => <li>{user}</li>
-//     const usersList = users.map(getUser)
-
-//     return (
-//         <main>
-//             <h4>User list:</h4>
-//             <ul>
-//                 {usersList}
-//             </ul>
-//         </main>
-//     )
-// }
-
-//8
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   const getUser = (user: string) => <li>{user}</li>;
-//   const usersList = users.map(getUser);
-//   console.log(Array.isArray(usersList))
-
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>{usersList}</ul>
-//     </main>
-//   );
-// }
-
-//9
-// import React, {useState} from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-
-// export const UsersList = () => {
-//     const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"])
-//     const getUser = (user: string) => <li>{user}</li>
-//     console.log(typeof getUser)
-//     return (
-//         <main>
-//             <h4>User list:</h4>
-//             <ul>
-//                 {users.map(getUser)}
-//             </ul>
-//         </main>
-//     )
-// }
-
-//10
-
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-
-type UserType = {
-  id: number;
-  name: string;
-  age: number;
-};
-
-function User(props: UserType) {
   return (
-    <li>
-      User {props.name}: {props.age} y.o.
-    </li>
-  );
-}
-
-export const UsersList = () => {
-  const state = [
-    { id: 1, name: "Bob", age: 34 },
-    { id: 2, name: "Alex", age: 25 },
-    { id: 3, name: "Ann", age: 30 },
-    { id: 4, name: "John", age: 23 },
-  ];
-  const users = [
-    { id: 1, userName: "Bob", age: 34 },
-    { id: 2, userName: "Alex", age: 25 },
-    { id: 3, userName: "Ann", age: 30 },
-    { id: 4, userName: "John", age: 23 },
-  ];
-
-  const [usersList, setUsersList] = useState<Array<UserType>>(XXX);
-  return (
-    <main>
-      <h5>User list:</h5>
-      <p>Тут будет список пользователей</p>
-    </main>
+    <div>
+      <ul>
+        {filterMoney.map((item, index) => {
+          return (
+            <li key={index}>
+              <span>{item.banknots}</span>;<span>{item.value}</span>;
+              <span>{item.number}</span>;
+            </li>
+          );
+        })}
+      </ul>
+      <button onClick={() => onClickFilterHandler("all")}>All</button>
+      <button onClick={() => onClickFilterHandler("Dollars")}>Dollar</button>
+      <button onClick={() => onClickFilterHandler("RUBLS")}>Ruble</button>
+    </div>
   );
 };
