@@ -16,7 +16,7 @@ export const App = () => {
 
   const [filter, setFilter] = useState<FilterType>("all");
   const [filterMoney, setFilterMoney] = useState(money);
-
+  const [testValue, setTestValue] = useState([{ text: "some text" }]);
   // const onClickFilterHandler = (currentValute: string) => {
   //   switch (currentValute) {
   //     case "all":
