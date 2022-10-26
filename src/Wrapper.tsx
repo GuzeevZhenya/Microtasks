@@ -122,35 +122,35 @@
 // };
 
 //7
-// type UserWalletType = {
-//   title: string;
-//   amount: number;
-// };
-// type UserWalletPropsType = {
-//   wallet: UserWalletType;
-// };
+type UserWalletType = {
+  title: string;
+  amount: number;
+};
+type UserWalletPropsType = {
+  wallet: UserWalletType;
+};
 
-// export const UserWallet: React.FC<UserWalletPropsType> = (props) => {
-//   return (
-//     <div>
-//       title: {props.wallet.title}, amount: {props.wallet.amount}
-//     </div>
-//   );
-// };
+export const UserWallet: React.FC<UserWalletPropsType> = (props) => {
+  return (
+    <div>
+      title: {props.wallet.title}, amount: {props.wallet.amount}
+    </div>
+  );
+};
 
-// export const UserMoney = () => {
-//   const wallets = [
-//     { title: "bitcoin", amount: 1 },
-//     { title: "$", amount: 100 },
-//   ];
+export const UserMoney = () => {
+  const wallets = [
+    { title: "bitcoin", amount: 1 },
+    { title: "$", amount: 100 },
+  ];
 
-//   return (
-//     <div>
-//       <UserWallet wallet={UserWallet.title} />
-//       <UserWallet wallet={yyy} />
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <UserWallet wallet={wallets[0]} />
+      <UserWallet wallet={wallets[1]} />
+    </div>
+  );
+};
 
 //8
 // import ReactDOM from 'react-dom'
@@ -216,37 +216,37 @@
 
 // ReactDOM.render(<App1 />, document.getElementById("root"));
 
-
 //10
-import ReactDOM from 'react-dom'
+// import ReactDOM from "react-dom";
 
-const Son = (props: any) => {
-    return <div>
-        I am son. My name is {props.name}
-    </div>
-}
+// const Son = (props: any) => {
+//   return <div>I am son. My name is {props.name}</div>;
+// };
 
+// const Father = (props: any) => {
+//   return (
+//     <div>
+//       I am father. My name is {props.name}
+//       <Son name={props.sonName} />
+//     </div>
+//   );
+// };
 
-const Father = (props: any) => {
-    return <div>
-        I am father. My name is {props.name}
-        <Son name={props.sonName} />
-    </div>
-}
+// const Granny = (props: any) => {
+//   return (
+//     <div>
+//       I am granny. My name is {props.name}
+//       <Father name={props.fatherName} sonName={props.sonName} />
+//     </div>
+//   );
+// };
 
-const Granny = (props: any) => {
-    return <div>
-        I am granny. My name is {props.name}
-        <Father name={props.fatherName} sonName={props.sonName} />
-    </div>
-}
+// export const App1 = () => {
+//   return (
+//     <div>
+//       <Granny name={"Бабуля"} fatherName={"Батя"} sonName={"Сын"} />
+//     </div>
+//   );
+// };
 
-export const App1 = () => {
-    return <div>
-        <Granny name={'Бабуля'} fatherName={'Батя'} sonName={'Сын'}/>
-    </div>
-}
-
-ReactDOM.render(<App1/>,
-    document.getElementById('root')
-)
+// ReactDOM.render(<App1 />, document.getElementById("root"));
