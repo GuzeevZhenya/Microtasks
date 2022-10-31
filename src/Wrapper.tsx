@@ -5,49 +5,51 @@
 //   city: string;
 // };
 // export const user: React.FC<PropsType> = (props) => {
-//   return <div>{city}</div>;
+//   return <div>{props.city}</div>;
 // };
 
 //2.
-// import ReactDOM from 'react-dom'
+// import ReactDOM from "react-dom";
 
 // export const YoutubeVideo = () => {
-//     return <div>
-//         <VideoHeader />
-//         <VideoContent />
-//         <VideoStatistics />
+//   return (
+//     <div>
+//       <VideoHeader />
+//       <VideoContent />
+//       <VideoStatistics />
 //     </div>
-// }
+//   );
+// };
 // export const VideoHeader = () => {
-//     return <div>
-//         😀 Заголовок видео
-//     </div>
-// }
+//   return <div>😀 Заголовок видео</div>;
+// };
 // export const VideoContent = () => {
-//     return <div>
-//         📼 Контент видео
-//     </div>
-// }
+//   return <div>📼 Контент видео</div>;
+// };
 // export const VideoStatistics = () => {
-//     return <div>
-//         📊 Статистика лайков
-//     </div>
-// }
+//   return <div>📊 Статистика лайков</div>;
+// };
 
-// ReactDOM.createRoot(<div><YoutubeVideo/></div>,
-//     document.getElementById('root')
+// ReactDOM.createRoot(
+//   <div>
+//     <YoutubeVideo />
+//   </div>,
+//   document.getElementById("root")
 // );
+
 //3.
 // type UserPropsType = {
-//     name: string
-//     description: string
-// }
+//   name: string;
+//   description: string;
+// };
 // export const User: React.FC<UserPropsType> = (props) => {
-//     return <div>
-//         <h1>Имя: {props.name}</h1>
-//          <div>Описание: {props.description}</div>
+//   return (
+//     <div>
+//       <h1>Имя: {props.name}</h1>
+//       <div>Описание: {props.description}</div>
 //     </div>
-// }
+//   );
+// };
 
 //4.
 // type PropsType = {
@@ -65,6 +67,7 @@
 // }
 
 //5
+// !!!{props.name} - не подходит ОТВЕТ
 // type PagePropsType = {
 //   age: number;
 //   name: string;
@@ -122,35 +125,35 @@
 // };
 
 //7
-type UserWalletType = {
-  title: string;
-  amount: number;
-};
-type UserWalletPropsType = {
-  wallet: UserWalletType;
-};
+// type UserWalletType = {
+//   title: string;
+//   amount: number;
+// };
+// type UserWalletPropsType = {
+//   wallet: UserWalletType;
+// };
 
-export const UserWallet: React.FC<UserWalletPropsType> = (props) => {
-  return (
-    <div>
-      title: {props.wallet.title}, amount: {props.wallet.amount}
-    </div>
-  );
-};
+// export const UserWallet: React.FC<UserWalletPropsType> = (props) => {
+//   return (
+//     <div>
+//       title: {props.wallet.title}, amount: {props.wallet.amount}
+//     </div>
+//   );
+// };
 
-export const UserMoney = () => {
-  const wallets = [
-    { title: "bitcoin", amount: 1 },
-    { title: "$", amount: 100 },
-  ];
+// export const UserMoney = () => {
+//   const wallets = [
+//     { title: "bitcoin", amount: 1 },
+//     { title: "$", amount: 100 },
+//   ];
 
-  return (
-    <div>
-      <UserWallet wallet={wallets[0]} />
-      <UserWallet wallet={wallets[1]} />
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <UserWallet wallet={wallets[0]} />
+//       <UserWallet wallet={wallets[1]} />
+//     </div>
+//   );
+// };
 
 //8
 // import ReactDOM from 'react-dom'
