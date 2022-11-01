@@ -1,3 +1,6 @@
+//1
+//!!! не <Array<string>>
+
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
@@ -13,18 +16,20 @@
 // ReactDOM.render(<UsersList />, document.getElementById("root"));
 
 //2
+//!!! function
 
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
 
-//  export const  UsersList =()=> {
+// export const UsersList = () => {
 //   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-
+//   console.log(typeof useState);
 //   return <p>Тут будет список пользователей!</p>;
 // };
 
 //3
+//!!! 2
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
@@ -40,6 +45,7 @@
 // }
 
 //4
+// !!! true
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
@@ -51,6 +57,7 @@
 // };
 
 //5
+//!!! function
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
@@ -61,7 +68,11 @@
 //   return <p>Тут будет список пользователей</p>;
 // };
 
+//6
+//!!!map
+
 //7
+// !!! getUser
 // import React, {useState} from 'react';
 // import ReactDOM from 'react-dom';
 // import './index.css';
@@ -82,6 +93,8 @@
 // }
 
 //8
+
+//!!!true
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 // import "./index.css";
@@ -101,6 +114,8 @@
 // }
 
 //9
+
+//!!!function
 // import React, {useState} from 'react';
 // import ReactDOM from 'react-dom';
 // import './index.css';
@@ -120,6 +135,7 @@
 // }
 
 //10
+//!!! state
 
 // import React, { useState } from "react";
 // import ReactDOM from "react-dom";
@@ -153,7 +169,7 @@
 //     { id: 4, userName: "John", age: 23 },
 //   ];
 
-//   const [usersList, setUsersList] = useState<Array<UserType>>(XXX);
+//   const [usersList, setUsersList] = useState<Array<UserType>>(state);
 //   return (
 //     <main>
 //       <h5>User list:</h5>
