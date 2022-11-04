@@ -1,179 +1,164 @@
-//1
-//!!! не <Array<string>>
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { Button } from "./Components/Button";
 
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+// Hi guys! Let`s reinforce our session:
 
-// export const UsersList = () => {
-//   const results = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   const users = results[0];
-//   const setUsers = results[1];
+// 1. Install AXIOS -it`s a library for HTTP requests. We  use it instead method FETCH.
+// https://axios-http.com/ru/docs/intro
+// yarn add axios
 
-//   return <p>Тут будет список пользователей</p>;
-// };
+// axios.get('https://jsonplaceholder.typicode.com/todos')
+//     .then((res) => {
+//         setTodos(res.data)
+//     })
 
-// ReactDOM.render(<UsersList />, document.getElementById("root"));
+//2. Let`s relocate our method map, and wrap it in a new variable:
+//const mapTodos=todos.map(el => {...
 
-//2
-//!!! function
+// return (
+//     <div className="App">
+//         <button onClick={onClickHandler}>CLEAN POSTS</button>
+//         <ul>
+//             {mapTodos}
+//         </ul>
+//     </div>
+// );
 
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+// 3. Create new button to redisplay  our data
 
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   console.log(typeof useState);
-//   return <p>Тут будет список пользователей!</p>;
-// };
+// 4. We are having a problem. The code is duplicated (axios.get...). Let`s create a new function and use it where we need.
+//Good luck!
 
-//3
-//!!! 2
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+type PropsType = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
 
-// export const UsersList = () => {
-//   const results = useState<Array<string>>(["Bob", "Alex", "Ann"]);
+function App() {
+  //const [todos, setTodos] = useState<Array<PropsType>>([]);
+  const [todos, setTodos] = useState<PropsType[]>([]);
 
-//   const users = results[0];
-//   const setUsers = results[1];
-//   console.log(results.length)
+  // useEffect(() => {
+  //   fetch("https://jsonplaceholder.typicode.com/todos")
+  //     .then((response) => response.json())
+  //     .then((json) => setTodos(json));
+  // }, []);
 
-//   return <p>Тут будет список пользователей</p>;
-// }
+  const onClickHandler = () => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => response.json())
+      .then((json) => setTodos(json));
+  };
 
-//4
-// !!! true
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+  const clean = () => {
+    setTodos([]);
+  };
+  return (
+    <div>
+      {/* <button onClick={onClickHandler}>CLEAN POSTS</button> */}
+      <Button name={"showMe"} callBack={onClickHandler} />
+      <Button name={"Clear"} callBack={clean} />
+      <ul>
+        {todos.map((el) => {
+          console.log(el.completed);
+          return (
+            <li>
+              <span>{el.id} - </span>
+              <span>{el.title}</span>
+              <span>{el.completed}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   console.log(Array.isArray(users));
-//   return <p>Тут будет список пользователей</p>;
-// };
+export default App;
 
-//5
-//!!! function
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+//----------------------------------------------------------------------------------------
 
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   console.log(typeof setUsers);
-//   return <p>Тут будет список пользователей</p>;
-// };
-
-//6
-//!!!map
-
-//7
-// !!! getUser
-// import React, {useState} from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-
-// export const UsersList = () => {
-//     const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"])
-//     const getUser = (user: string) => <li>{user}</li>
-//     const usersList = users.map(getUser)
-
+// import React, {useEffect, useState} from 'react';
+// import './App.css';
+// import axios from "axios";
+//
+//
+// type PropsType =
+//     {
+//         userId: number,
+//         id: number,
+//         title: string,
+//         completed: boolean
+//     }
+//
+// function App() {
+//     const [todos, setTodos] = useState<Array<PropsType>>([])
+//
+//     const axiosRequest=()=>{
+//         axios.get('https://jsonplaceholder.typicode.com/todos')
+//             .then((res) => {
+//                 setTodos(res.data)
+//             })
+//     }
+//
+//     useEffect(() => {
+//         // fetch('https://jsonplaceholder.typicode.com/todos')
+//         //     .then(response => response.json())
+//         //     .then(json => setTodos(json))
+//
+//         // axios.get('https://jsonplaceholder.typicode.com/todos')
+//         //     .then((res) => {
+//         //         setTodos(res.data)
+//         //     })
+//
+//         axiosRequest()
+//     }, [])
+//
+//     const mapTodos=todos.map(el=>{
+//         return (
+//             <li>
+//                 <span>{el.id} - </span>
+//                 <span>{el.title}</span>
+//                 <span>{el.completed}</span>
+//             </li>
+//         )
+//     })
+//
+//     const onClickHandler = () => {
+//         setTodos([])
+//     }
+//
+//     const onClickHandlerForRedisplay=()=>{
+//         // axios.get('https://jsonplaceholder.typicode.com/todos')
+//         //     .then((res) => {
+//         //         setTodos(res.data)
+//         //     })
+//
+//         axiosRequest()
+//     }
+//
 //     return (
-//         <main>
-//             <h4>User list:</h4>
+//         <div className="App">
+//             <button onClick={onClickHandler}>CLEAN POSTS</button>
+//             <button onClick={onClickHandlerForRedisplay}>REDISPLAY</button>
 //             <ul>
-//                 {usersList}
+//                 {/*{todos.map(el => {*/}
+//                 {/*    return (*/}
+//                 {/*        <li>*/}
+//                 {/*            <span>{el.id} - </span>*/}
+//                 {/*            <span>{el.title}</span>*/}
+//                 {/*            <span>{el.completed}</span>*/}
+//                 {/*        </li>*/}
+//                 {/*    )*/}
+//                 {/*})}*/}
+//
+//                 {mapTodos}
 //             </ul>
-//         </main>
-//     )
+//         </div>
+//     );
 // }
-
-//8
-
-//!!!true
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// export const UsersList = () => {
-//   const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"]);
-//   const getUser = (user: string) => <li>{user}</li>;
-//   const usersList = users.map(getUser);
-//   console.log(Array.isArray(usersList))
-
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>{usersList}</ul>
-//     </main>
-//   );
-// }
-
-//9
-
-//!!!function
-// import React, {useState} from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-
-// export const UsersList = () => {
-//     const [users, setUsers] = useState<Array<string>>(["Bob", "Alex", "Ann"])
-//     const getUser = (user: string) => <li>{user}</li>
-//     console.log(typeof getUser)
-//     return (
-//         <main>
-//             <h4>User list:</h4>
-//             <ul>
-//                 {users.map(getUser)}
-//             </ul>
-//         </main>
-//     )
-// }
-
-//10
-//!!! state
-
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
-
-// function User(props: UserType) {
-//   return (
-//     <li>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
-
-// export const UsersList = () => {
-//   const state = [
-//     { id: 1, name: "Bob", age: 34 },
-//     { id: 2, name: "Alex", age: 25 },
-//     { id: 3, name: "Ann", age: 30 },
-//     { id: 4, name: "John", age: 23 },
-//   ];
-//   const users = [
-//     { id: 1, userName: "Bob", age: 34 },
-//     { id: 2, userName: "Alex", age: 25 },
-//     { id: 3, userName: "Ann", age: 30 },
-//     { id: 4, userName: "John", age: 23 },
-//   ];
-
-//   const [usersList, setUsersList] = useState<Array<UserType>>(state);
-//   return (
-//     <main>
-//       <h5>User list:</h5>
-//       <p>Тут будет список пользователей</p>
-//     </main>
-//   );
-// };
+//
+// export default App;
