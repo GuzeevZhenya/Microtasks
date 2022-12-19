@@ -1,0 +1,77 @@
+import React from "react";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import styles from "./Site.module.css";
+import { PageOne } from "./pages/PageOne";
+import { PageTwo } from "./pages/PageTwo";
+import { PageThree } from "./pages/PageThree";
+import { Error404 } from "./pages/Error404";
+import { Page } from "./pages/Page";
+import { dataState } from "./dataState/dataState";
+
+export const Site = () => {
+  return (
+    <div>
+      <div className={styles.header}>
+        <h1>HEADER</h1>
+      </div>
+      <div className={styles.body}>
+        <div className={styles.nav}>
+          <div>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navLink : styles.active
+              }
+              to={"/page/0"}
+            >
+              Page One
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navLink : styles.active
+              }
+              to={"/page/1"}
+            >
+              Page Two
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navLink : styles.active
+              }
+              to={"/page/2"}
+            >
+              Page Three
+            </NavLink>
+          </div>
+          {/* <div>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navLink : styles.active
+              }
+              to={"/page3"}
+            >
+              Page Three
+            </NavLink>
+          </div> */}
+        </div>
+        <div className={styles.content}>
+          <Routes>
+            <Route path={"/"} element={<Navigate to={"/page1"} />}></Route>
+
+            <Route
+              path={"/page/:id"}
+              element={<Page dataState={dataState} />}
+            ></Route>
+
+            {/* <Route path={"/page3"} element={<PageThree />}></Route> */}
+
+            <Route path={"/*"} element={<Error404 />}></Route>
+          </Routes>
+        </div>
+      </div>
+    </div>
+  );
+};
