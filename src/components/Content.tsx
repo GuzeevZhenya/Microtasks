@@ -8,9 +8,7 @@ type ContentType = {
 };
 
 export const Content = (props: ContentType) => {
-  console.log(props);
-
-  return props.page.pages.length >= props.route ? (
+  return props.page.pages.length > props.route ? (
     <div>
       <div>{props.page.pages[props.route].heading}</div>
       <div>{props.page.pages[props.route].about}</div>
