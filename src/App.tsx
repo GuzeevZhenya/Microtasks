@@ -1,40 +1,68 @@
-import React from "react";
-import { Button } from "./Button";
+import React, { useState } from "react";
 import "./App.css";
 
-function App() {
-  // const clickEvent = (event: string) => {
-  //   console.log("hi");
-  // };
+// 1. type UserPropsType = {
+//   name: string;
+//   description: string;
+// };
+// export const User: React.FC<UserPropsType> = (props) => {
+//   return (
+//     <div>
+//       <h1>Имя: {props.name}</h1>
+//       <div>Описание: {props.description}</div>
+//     </div>
+//   );
+// };
 
-  const onClickHandler = (name: string) => {
-    console.log(name);
-  };
+// 2.
+// type PagePropsType = {
+//   age: number;
+//   name: string;
+//   avatarUrl: string;
+// };
+// export const Page: React.FC<PagePropsType> = (props) => {
+//   return <User a={props.age} n={props.name} />;
+// };
+// type UserPropsType = {
+//   a: number;
+//   n: string;
+// };
+// export const User: React.FC<UserPropsType> = (props) => {
+//   return (
+//     <div>
+//       name: {props.n}, age: {props.a}
+//     </div>
+//   );
+// };
 
-  const foo1 = () => {
-    console.log("10200");
-  };
-  const foo2 = (price: number) => {
-    console.log(price);
-  };
+// export const App = () => {
+//   return <Page age={0} name={""} avatarUrl={""} />;
+// };
 
-  const ButtonClick = (subscriber: string) => {
-    console.log(subscriber);
-  };
-  const ButtonRemove = (subscriber: string) => {
-    console.log(subscriber);
-  };
-  return (
-    <div className="App">
-      {/* <button onClick={(event) => clickEvent('hi')}>Click</button> */}
-      {/* <button onClick={(event: MouseEvent<HTMLButtonElement></HTMLButtonElement>)=>onClickHandler("Vasia")}>Click</button> */}
-      {/* <button onClick={() => onClickHandler("info")}>Button</button>
-      <button onClick={foo1}>Click1</button>
-      <button onClick={() => foo2(100200)}>Click1</button> */}
-      <Button name={"click"} callBack={() => ButtonClick("click")} />
-      <Button name={"remove"} callBack={() => ButtonRemove("remove")} />
-    </div>
-  );
-}
+// Что нужно написать вместо xxx и yyy?
+// Ответ дайте через пробел, например: blabla onClick(props)
 
-export default App;
+//3
+// type UserWalletType = {
+//     title: string
+//     amount: number
+// }
+// type UserWalletPropsType = {
+//     wallet: UserWalletType
+// }
+
+// export const UserWallet: React.FC<UserWalletPropsType> = (props) => {
+//     return <div>title: {props.wallet.title}, amount: {props.wallet.amount}</div>
+// }
+
+// export const UserMoney = () => {
+//     const wallets = [
+//         {title: 'bitcoin', amount: 1},
+//         {title: '$', amount: 100}
+//     ]
+
+//     return <div>
+//         <UserWallet wallet={xxx} />
+//         <UserWallet wallet={yyy} />
+//     </div>
+// }
