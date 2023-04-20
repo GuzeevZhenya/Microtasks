@@ -1,327 +1,57 @@
-//2
-// import React, { useState } from "react";
+import React, { useState } from "react";
+import "./App.css";
+import { Country } from "./Country";
 
-// import "./index.css";
+export type BanknotsType = "Dollars" | "RUBLS" | "All"; // создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
+export type MoneyType = {
+  banknotes: BanknotsType;
+  value: number; // не ленимся, убираем заглушку, и пишем правильный тип)
+  number: string; // ложку за Димыча, за...
+};
 
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
+let defaultMoney: Array<MoneyType> = [
+  // типизируем
+  { banknotes: "Dollars", value: 100, number: " a1234567890" },
+  { banknotes: "Dollars", value: 50, number: " z1234567890" },
+  { banknotes: "RUBLS", value: 100, number: " w1234567890" },
+  { banknotes: "Dollars", value: 100, number: " e1234567890" },
+  { banknotes: "Dollars", value: 50, number: " c1234567890" },
+  { banknotes: "RUBLS", value: 100, number: " r1234567890" },
+  { banknotes: "Dollars", value: 50, number: " x1234567890" },
+  { banknotes: "RUBLS", value: 50, number: " v1234567890" },
+];
 
-// function User(props: UserType) {
-//   return (
-//     <li>
-//       Student {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
+// типизируем на входе и выходе
+export const moneyFilter = (money: MoneyType[], filter: BanknotsType): any => {
+  if (filter === "All") {
+    return defaultMoney;
+  }
 
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 34 },
-//     { id: 2, name: "Alex", age: 29 },
-//     { id: 3, name: "Ann", age: 25 },
-//     { id: 4, name: "John", age: 36 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>
-//         {users.map((u) => (
-//           <User key={u.id} {...u} />
-//         ))}
-//       </ul>
-//     </main>
-//   );
-// };
+  return money.filter((el) => el.banknotes === filter);
+  //   return money.filter()
+  //если пришел filter со значением 'All', то возвращаем все банкноты
+  //return money.filter... ну да, придется фильтровать
+};
 
-//3
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
+function App() {
+  // убираем заглушки в типизации и вставляем в качестве инициализационного значения defaultMoney
+  const [money, setMoney] = useState<MoneyType[]>(defaultMoney);
+  const [filterValue, setFilterValue] = useState<BanknotsType>("All"); // по умолчанию указываем все банкноты
 
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
+  // а вот сейчас притормаживаем. И вдумчиво: константа filteredMoney получает результат функции moneyFilter
+  // в функцию передаем деньги и фильтр, по которому ихбудем выдавать(ретёрнуть)
+  const filteredMoney = moneyFilter(money, filterValue);
+  console.log(filteredMoney);
+  return (
+    <div className="App">
+      <Country
+        data={filteredMoney} //отрисовать будем деньги после фильтрации
+        setFilterValue={setFilterValue} //useState передаем? Так можно было?!
+      />
+    </div>
+  );
+}
 
-// function User(props: UserType) {
-//   return (
-//     <li>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
+// Итого: в этой компоненте у нас мозги. А вот отрисовка где-то глубже. Погружаемся в Country
 
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 25 },
-//     { id: 2, name: "Alex", age: 28 },
-//     { id: 3, name: "Ann", age: 23 },
-//     { id: 4, name: "John", age: 30 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   // Пользователи старше 25 лет:
-//   // const olderThen25Users = users.filter(u => u.age > 25)
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>{/*{ olderThen25Users.map(u => <User key={u.id} {...u}/>)}*/}</ul>
-//     </main>
-//   );
-// }
-
-// ReactDOM.render(<UsersList />, document.getElementById("root"));
-// // Что надо написать вместо xxx, чтобы код работал?
-
-//4
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
-
-// function User(props: UserType) {
-//   return (
-//     <li>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
-
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 25 },
-//     { id: 2, name: "Alex", age: 28 },
-//     { id: 3, name: "Ann", age: 23 },
-//     { id: 4, name: "John", age: 30 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   // Необходимо отрендерить список пользователей старше 25 лет:
-//   const getOlderThen25Users = (u: UserType) => u.age > 25;
-//   const olderThen25Users = users.filter(getOlderThen25Users);
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>{/*{ olderThen25Users.map(u => <User key={u.id} {...u}/>)}*/}</ul>
-//     </main>
-//   );
-// };
-
-// ReactDOM.render(<UsersList />, document.getElementById("root"));
-
-// Что надо написать вместо xxx, чтобы код работал?
-
-//5
-
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
-
-// function User(props: UserType) {
-//   return (
-//     <li>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
-
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 25 },
-//     { id: 2, name: "Alex", age: 28 },
-//     { id: 3, name: "Ann", age: 23 },
-//     { id: 4, name: "John", age: 30 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   // Необходимо отрендерить список ользователей старше 25 лет:
-//   const getOlderThen25Users = (u: UserType) => u.age > 25;
-//   const olderThen25Users = users.filter(getOlderThen25Users);
-//   console.log(Array.isArray(olderThen25Users));
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>
-//         {olderThen25Users.map((u) => (
-//           <User key={u.id} {...u} />
-//         ))}
-//       </ul>
-//     </main>
-//   );
-// };
-
-// ReactDOM.render(<UsersList />, document.getElementById("root"));
-// // Что вернёт выражение: Array.isArray(olderThen25Users)
-
-//6
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
-
-// type UserPropsType = UserType & {
-//   deleteUser: (id: number) => void;
-// };
-
-// function User(props: UserPropsType) {
-//   const deleteUser = () => props.deleteUser(props.id);
-//   return (
-//     <li>
-//       <button onClick={deleteUser}>x</button>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// }
-
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 25 },
-//     { id: 2, name: "Alex", age: 28 },
-//     { id: 3, name: "Ann", age: 23 },
-//     { id: 4, name: "John", age: 30 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   const deleteUser = (userID: number) => {
-//     const filteredUsers = users.filter((u) => u.id !== userID);
-//     setUsers(filteredUsers);
-//   };
-//   return (
-//     <main>
-//       <h4>User list:</h4>
-//       <ul>
-//         {users.map((u) => (
-//           <User key={u.id} {...u} deleteUser={deleteUser} />
-//         ))}
-//       </ul>
-//     </main>
-//   );
-// };
-
-// ReactDOM.render(<UsersList />, document.getElementById("root"));
-// // Что надо написать вместо xxx, чтобы код работал?
-
-//7
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// // function Button() {
-// export const UsersList = () => {
-//   return <button onClick={() => alert()}>Click</button>;
-// };
-
-// // Что надо написать вместо ххх,
-// // что бы на странице появился пустой alert при клике по кнопке?
-
-//8
-// import React, { MouseEvent } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// // function Button() {
-// export const UsersList = () => {
-//   const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-//     console.log(typeof e === "object");
-//   };
-//   return <button onClick={onClickHandler}>Click</button>;
-// };
-
-// // Какой тип данных представляет аргумент функции-обработчика?
-// // Что надо написать вместо ххх, что бы в консоль вывело true?
-
-//9
-// import React, { useState, MouseEvent } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// // function Button() {
-// export const UsersList = () => {
-//   const [tagName, setTagName] = useState<string>();
-//   const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-//     // setTagName(e.xxx.tagName);
-//     console.log(e.currentTarget.tagName);
-//   };
-//   return (
-//     <>
-//       <p>{tagName}</p>
-//       <button onClick={onClickHandler}>
-//         <span>Click</span>
-//       </button>
-//     </>
-//   );
-// };
-
-// // Что надо написать вместо ххх, что бы на странице появился текст BUTTON?
-
-//10
-// import React, { useState } from "react";
-// import ReactDOM from "react-dom";
-// import "./index.css";
-
-// type UserType = {
-//   id: number;
-//   name: string;
-//   age: number;
-// };
-
-// type UserPropsType = UserType & {
-//   deleteUser: (id: number) => void;
-// };
-
-// export const User = (props: UserPropsType) => {
-//   return (
-//     <li>
-//       <button onClick={() => props.deleteUser(props.id)}>x</button>
-//       User {props.name}: {props.age} y.o.
-//     </li>
-//   );
-// };
-
-// export const UsersList = () => {
-//   const data: Array<UserType> = [
-//     { id: 1, name: "Bob", age: 25 },
-//     { id: 2, name: "Alex", age: 28 },
-//     { id: 3, name: "Ann", age: 23 },
-//     { id: 4, name: "John", age: 30 },
-//   ];
-//   const [users, setUsers] = useState<Array<UserType>>(data);
-//   const deleteUser = (userID: number) => {
-//     setUsers(users.filter((u) => u.id !== userID));
-//   };
-//   return (
-//     <main>
-//       <h4>Users list:</h4>
-//       <ul>
-//         {users.map((u) => (
-//           <User key={u.id} {...u} deleteUser={deleteUser} />
-//         ))}
-//       </ul>
-//     </main>
-//   );
-// };
-
-// // В типе UserPropsType у функции deleteUser в параметрах указан тип "any".
-// // Какой тип было бы указать правильнее?
-
-
-
- 
-export {};
+export default App;
