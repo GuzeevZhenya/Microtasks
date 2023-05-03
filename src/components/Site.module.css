@@ -25,3 +25,8 @@
   color: white;
   font-size: 30px;
 }
+
+.navLink {
+  text-decoration: none;
+  color: #2923;
+}
