@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import "./App.css";
-import { Site } from "./components/Site";
+import { useKeyPress } from "./Hooks/useKeyPress";
+import { useInterval } from "./Hooks/useInterval";
+import useThrottle from "./Hooks/useThrottle";
+export const App = () => {
+  const closeModalKeyPress = useKeyPress("Escape");
 
-function App() {
-  return (
-    <div>
-      <Site />
-    </div>
-  );
-}
+  const [count, setCount] = useState(0);
 
-export default App;
+  useInterval(() => {
+    setCount(count + 1);
+  }, 1000);
+
+  const [inputValue, setInputValue] = useState("");
+
+  useThrottle(() => {
+    // вызов API
+  }, 500);
+
+  return <div>App</div>;
+};

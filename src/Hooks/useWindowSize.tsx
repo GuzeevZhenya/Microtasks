@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState({
+//Хук useWindowSize - хук для получения размера экрана
+
+interface WindowSize {
+  width: number;
+  height: number;
+}
+
+export const useWindowSize = (): WindowSize => {
+  const [windowSize, setWindowSize] = useState<WindowSize>({
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -19,5 +27,5 @@ export const useWindowSize = () => {
     };
   }, []);
 
-  return windowSize.width;
+  return windowSize;
 };
